@@ -1,0 +1,67 @@
+name: ClaudeMonitor
+options:
+  bundleIdPrefix: com.sponomarenko
+  deploymentTarget:
+    macOS: "14.0"
+  developmentLanguage: en
+  createIntermediateGroups: true
+settings:
+  base:
+    DEVELOPMENT_TEAM: 89X7GT8Y93
+    CODE_SIGN_STYLE: Automatic
+    SWIFT_VERSION: "5.0"
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    ENABLE_HARDENED_RUNTIME: YES
+    LOCALIZATION_PREFERS_STRING_CATALOGS: YES
+    SWIFT_EMIT_LOC_STRINGS: YES
+targets:
+  ClaudeMonitor:
+    type: application
+    platform: macOS
+    sources:
+      - App
+      - Shared
+    entitlements:
+      path: App/ClaudeMonitor.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - 89X7GT8Y93.com.sponomarenko.claudemonitor
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: Claude Monitor
+        LSUIElement: true
+        LSApplicationCategoryType: public.app-category.developer-tools
+        CFBundleURLTypes:
+          - CFBundleURLName: com.sponomarenko.claudemonitor
+            CFBundleURLSchemes: [claudemonitor]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.sponomarenko.claudemonitor
+        PRODUCT_NAME: Claude Monitor
+    dependencies:
+      - target: ClaudeMonitorWidget
+  ClaudeMonitorWidget:
+    type: app-extension
+    platform: macOS
+    sources:
+      - Widget
+      - Shared
+    entitlements:
+      path: Widget/ClaudeMonitorWidget.entitlements
+      properties:
+        com.apple.security.app-sandbox: true
+        com.apple.security.application-groups:
+          - 89X7GT8Y93.com.sponomarenko.claudemonitor
+    info:
+      path: Widget/Info.plist
+      properties:
+        CFBundleDisplayName: Claude Monitor
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.sponomarenko.claudemonitor.widget
+        PRODUCT_NAME: ClaudeMonitorWidget
+        SKIP_INSTALL: YES
