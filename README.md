@@ -30,3 +30,9 @@ brew install xcodegen
 xcodegen generate
 open ClaudeMonitor.xcodeproj
 ```
+
+## Release
+
+`scripts/release.sh` builds a Developer ID-signed, notarized and stapled `dist/ClaudeMonitor-<version>.dmg`;
+`scripts/release.sh --publish` also creates the GitHub release `v<version>` with the DMG attached.
+The version comes from `MARKETING_VERSION` in `project.yml`. One-time setup is described at the top of the script.
